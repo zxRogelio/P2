@@ -3,63 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Document</title>
+    <title>Operaciones Básicas con Funciones</title>
 </head>
 <body>
     <h1>Operaciones Básicas con Funciones</h1>
-    <form id="calculadoraForm">
+
+    <!-- Formulario para ingresar números -->
+    <form id="operacionesForm">
         <label for="numero1">Número 1:</label>
         <input type="number" id="numero1" required>
         <br>
         <label for="numero2">Número 2:</label>
         <input type="number" id="numero2" required>
         <br>
-        <label for="operador">Operador:</label>
-        <select id="operador">
-            <option value="+">Suma (+)</option>
-            <option value="-">Resta (-)</option>
-            <option value="*">Multiplicación (*)</option>
-            <option value="/">División (/)</option>
-        </select>
-        <br>
-        <button type="button" onclick="calcular()">Calcular</button>
+        <button type="button" onclick="realizarOperaciones()">Calcular</button>
     </form>
-    <div id="resultado"></div>
+
+    <!-- Resultados de las operaciones -->
+    <div id="resultados"></div>
+
+    <!-- Script de JavaScript -->
     <script>
-        // Función para realizar la operación
-        function calcular() {
-            // Obtener los valores del formulario
+        // Función para sumar dos números
+        function sumar(a, b) {
+            return a + b;
+        }
+
+        // Función para restar dos números
+        function restar(a, b) {
+            return a - b;
+        }
+
+        // Función para multiplicar dos números
+        function multiplicar(a, b) {
+            return a * b;
+        }
+
+        // Función para dividir dos números
+        function dividir(a, b) {
+            // Validar que el divisor no sea cero
+            if (b !== 0) {
+                return a / b;
+            } else {
+                return "Error: División por cero";
+            }
+        }
+
+        // Función para realizar las operaciones
+        function realizarOperaciones() {
+            // Obtener los valores de los números del formulario
             var num1 = parseFloat(document.getElementById("numero1").value);
             var num2 = parseFloat(document.getElementById("numero2").value);
-            var operador = document.getElementById("operador").value;
 
-            // Switch 
-            var resultado;
-            switch (operador) {
-                case '+':
-                    resultado = num1 + num2;
-                    break;
-                case '-':
-                    resultado = num1 - num2;
-                    break;
-                case '*':
-                    resultado = num1 * num2;
-                    break;
-                case '/':
-                    if (num2 !== 0) {
-                        resultado = num1 / num2;
-                    } else {
-                        resultado = "Error: División por cero";
-                    }
-                    break;
-                default:
-                    resultado = "Error: Operador no válido";
-            }
-            // Mostrar el resultado en la página
-            document.getElementById("resultado").innerHTML = `
-                <h2>Resultado:</h2>
-                <p>${num1} ${operador} ${num2} = ${resultado}</p>
+            // Calcular los resultados de las operaciones
+            var suma = sumar(num1, num2);
+            var resta = restar(num1, num2);
+            var multiplicacion = multiplicar(num1, num2);
+            var division = dividir(num1, num2);
+
+            // Mostrar los resultados en la página
+            document.getElementById("resultados").innerHTML = `
+                <h2>Resultados:</h2>
+                <p>Suma: ${suma}</p>
+                <p>Resta: ${resta}</p>
+                <p>Multiplicación: ${multiplicacion}</p>
+                <p>División: ${division}</p>
             `;
         }
     </script>
